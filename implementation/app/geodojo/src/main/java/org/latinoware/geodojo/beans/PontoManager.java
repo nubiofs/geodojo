@@ -11,6 +11,11 @@ import javax.persistence.EntityManager;
 import org.latinoware.geodojo.entity.Ponto;
 import org.ol4jsf.util.WKTFeaturesCollection;
 
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
+
 /**
  * Bean de teste para tratar a requisicao vinda da view.
  * Note que nao e um managed bean do JSF.. UHUUUU!!!
@@ -32,10 +37,12 @@ public class PontoManager {
         wkts.add("POINT(-56.25 -11.6015625)");
     }
 
-    public void testeCriar() {
+    public void testeCriar() throws ParseException {
         Ponto p = new Ponto();
 
         p.setNome("Teste " + Math.random());
+        
+        p.setLocalizacao(((Point)new WKTReader().read("POINT(-56.25 -11.6015625)")));
 
         em.getTransaction().begin();
 
@@ -47,7 +54,7 @@ public class PontoManager {
     public String getWkts() {
         WKTFeaturesCollection features = new WKTFeaturesCollection();
         features.addAllFeatures(wkts);
-
+        
         return features.toMap();
     }
 }

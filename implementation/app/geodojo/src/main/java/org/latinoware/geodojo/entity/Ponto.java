@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Type;
+
+import com.vividsolutions.jts.geom.Point;
+
 /**
  * Entidade de Teste
  * @TODO Precisa incluir objeto JTS e mapear com o HibernateSpatial
@@ -22,7 +26,19 @@ public class Ponto implements Serializable {
 	
 	public String nome;
 
+	@Type(type = "org.hibernatespatial.GeometryUserType")
+	public Point localizacao;
 	
+	
+	
+	public Point getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Point localizacao) {
+		this.localizacao = localizacao;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +55,7 @@ public class Ponto implements Serializable {
 		this.nome = nome;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
