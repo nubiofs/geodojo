@@ -14,6 +14,7 @@ public class DatabaseListener implements ServletContextListener {
 
 	private final Server server;
 
+	
 	public DatabaseListener() {
 		server = new Server();
 		server.setDatabaseName(0, "geodojodb");

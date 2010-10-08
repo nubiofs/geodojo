@@ -19,6 +19,20 @@
             <id>EclipseLink Repo</id>
             <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
         </repository>
+        <repository>
+			<id>OSGEO GeoTools repo</id>
+			<url>http://download.osgeo.org/webdav/geotools</url>
+		</repository>
+		<repository>
+			<id>Hibernate Spatial repo</id>
+			<url>http://www.hibernatespatial.org/repository</url>
+		</repository>
+        <!-- add JBOSS repository for easy access to Hibernate libraries -->
+        <repository>
+            <id>JBOSS</id>
+            <url>http://repository.jboss.com/maven2</url>
+        </repository>
+		      
     </repositories>
 
     <properties>
@@ -82,6 +96,14 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+    		<groupId>hibernate</groupId>
+   			 <artifactId>hibernate-entitymanager</artifactId>
+   			 <version>3.4.0.GA</version>
+		</dependency>
+        
+        
+        <!-- Dependencias para o eclipse link comentada -->
+        <!--  dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
             <version>2.0.1</version>
@@ -105,12 +127,51 @@
             <version>4.0.2.GA</version>
             <scope>runtime</scope>
         </dependency>
+        
+        -->
+        
+        <!-- the Postgis JDBC driver -->
+        <dependency>
+            <groupId>org.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+
+        <!-- the postgresql driver -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <!-- scope>provided</scope>  -->
+            <version>8.4-701.jdbc3</version>
+        </dependency>
+
+        <!-- Hibernate uses slf4j for logging, for our purposes here use the simple backend -->
+               <dependency>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>slf4j-simple</artifactId>
+                   <version>1.5.6</version>
+               </dependency>
+               
+                 <dependency>
+                   <groupId>org.slf4j</groupId>
+                   <artifactId>slf4j-api</artifactId>
+                   <version>1.5.6</version>
+               </dependency>
+        
+       
+        <!-- GIS DEPENDENCIES -->
         <dependency>
             <groupId>org.ol4jsf</groupId>
             <artifactId>ol4jsf-core</artifactId>
             <version>2.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+			<groupId>org.hibernatespatial</groupId>
+			<artifactId>hibernate-spatial-postgis</artifactId>
+			<version>1.0</version>
+		</dependency>
+        
     </dependencies>
 
 
