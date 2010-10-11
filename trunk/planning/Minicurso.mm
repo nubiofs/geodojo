@@ -1,14 +1,15 @@
 <map version="0.8.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1286330161775" ID="Freemind_Link_1540915628" MODIFIED="1286330189680" TEXT="GeoDojo">
-<node CREATED="1286330559274" FOLDED="true" ID="_" MODIFIED="1286330561320" POSITION="right" TEXT="Ambiente">
+<node CREATED="1286818473166" ID="Freemind_Link_662992580" MODIFIED="1286818490027" POSITION="right" TEXT="Regras do Dojo"/>
+<node CREATED="1286330559274" FOLDED="true" ID="_" MODIFIED="1286818602833" POSITION="right" TEXT="Iniciando o Ambiente de Desenvolvimento">
 <node CREATED="1286330561591" FOLDED="true" ID="Freemind_Link_33803856" MODIFIED="1286330565437" TEXT="OSGEO Live DVD">
 <node CREATED="1286330861382" ID="Freemind_Link_326274748" MODIFIED="1286330862911" TEXT="http://live.osgeo.org/"/>
 </node>
-<node CREATED="1286330867558" ID="Freemind_Link_1828792151" MODIFIED="1286330869313" TEXT="Eclipse">
+<node CREATED="1286330867558" FOLDED="true" ID="Freemind_Link_1828792151" MODIFIED="1286330869313" TEXT="Eclipse">
 <node CREATED="1286331451718" ID="Freemind_Link_1422099124" MODIFIED="1286331455699" TEXT="Jboss tools"/>
 </node>
-<node CREATED="1286330869741" ID="Freemind_Link_1830943170" MODIFIED="1286330871473" TEXT="Maven">
+<node CREATED="1286330869741" FOLDED="true" ID="Freemind_Link_1830943170" MODIFIED="1286330871473" TEXT="Maven">
 <node CREATED="1286330935295" ID="Freemind_Link_1268504751" MODIFIED="1286330937983" TEXT="m2"/>
 </node>
 <node CREATED="1286330872497" ID="Freemind_Link_648707647" MODIFIED="1286330875782" TEXT="Postgis"/>
@@ -18,9 +19,11 @@
 <node CREATED="1286330917880" ID="Freemind_Link_1089975978" MODIFIED="1286330919814" TEXT="pgAdmin"/>
 <node CREATED="1286332671932" ID="Freemind_Link_1634231787" MODIFIED="1286332673878" TEXT="phppgadmin"/>
 </node>
-<node CREATED="1286331534900" FOLDED="true" ID="Freemind_Link_1271854733" MODIFIED="1286332854475" POSITION="right" TEXT="Apresenta&#xe7;&#xe3;o do Sistemas a ser desenvolvido">
-<node CREATED="1286408883980" ID="Freemind_Link_974641268" MODIFIED="1286408891840" TEXT="Twitter"/>
-<node CREATED="1286409216362" ID="Freemind_Link_1476575784" MODIFIED="1286409218230" TEXT="GeoRSS"/>
+<node CREATED="1286331534900" ID="Freemind_Link_1271854733" MODIFIED="1286332854475" POSITION="right" TEXT="Apresenta&#xe7;&#xe3;o do Sistemas a ser desenvolvido">
+<node CREATED="1286818970903" ID="Freemind_Link_1661852310" MODIFIED="1286818974843" TEXT="Spatial Twitter">
+<node CREATED="1286818976492" ID="Freemind_Link_132979587" MODIFIED="1286819018820" TEXT="Envio de um twitt com coordenadas espaciais"/>
+<node CREATED="1286819022331" ID="Freemind_Link_102247473" MODIFIED="1286819104082" TEXT="Apresenta no mapa a partir de uma hashtag todos os twitts que contem dados espaciais e a localiza&#xe7;&#xe3;o do individuo"/>
+</node>
 </node>
 <node CREATED="1286331560855" FOLDED="true" ID="Freemind_Link_115267873" MODIFIED="1286332108947" POSITION="right" TEXT="Trabalhando com a base de dados espacial (Postgis)">
 <node CREATED="1286331595606" FOLDED="true" ID="Freemind_Link_72431502" MODIFIED="1286331601028" TEXT="Introducao a postgis">
@@ -88,7 +91,7 @@
 <icon BUILTIN="help"/>
 <node CREATED="1286332905595" ID="Freemind_Link_869914588" MODIFIED="1286409972145" TEXT="Sugest&#xe3;o: Twitter ou GeoRSS"/>
 </node>
-<node CREATED="1286333225879" FOLDED="true" ID="Freemind_Link_1730435074" MODIFIED="1286333228383" POSITION="left" TEXT="Atividades">
+<node CREATED="1286333225879" ID="Freemind_Link_1730435074" MODIFIED="1286333228383" POSITION="left" TEXT="Atividades">
 <node CREATED="1286333372923" FOLDED="true" ID="Freemind_Link_785474894" MODIFIED="1286333379244" TEXT="Definir estrategia para o dojo">
 <node CREATED="1286410192997" ID="Freemind_Link_266527169" MODIFIED="1286410198913" TEXT="Roteiro"/>
 <node CREATED="1286410199165" ID="Freemind_Link_1904835267" MODIFIED="1286410204448" TEXT="Lista de Participantes"/>
