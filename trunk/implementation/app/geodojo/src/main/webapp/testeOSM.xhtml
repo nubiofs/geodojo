@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:m="http://www.ol4jsf.org">
+    <h:head>
+        <title>Teste OpenStreetMap</title>
+    </h:head>
+    <h:body>
+        <m:map width="512px" height="256px" jsVariable="map">
+            <m:osmLayer />
+            <m:script>
+                map.setCenter(new OpenLayers.LonLat(13.41,52.52)
+                .transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                new OpenLayers.Projection("EPSG:900913")
+                ), 15
+                );
+            </m:script>
+        </m:map>
+    </h:body>
+</html>
+
