@@ -41,6 +41,16 @@
         <servlet-name>OL4JSF Resources</servlet-name>
         <url-pattern>/ol4jsf_resource/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GeoRSS</servlet-name>
+        <servlet-class>org.latinoware.geodojo.servlet.GeoRSS</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GeoRSS</servlet-name>
+        <url-pattern>/GeoRSS</url-pattern>
+    </servlet-mapping>
   
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
