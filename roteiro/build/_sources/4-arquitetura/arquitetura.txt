@@ -1,0 +1,10 @@
+:Author: Rafael Soto
+:Author: Robert Anderson
+:Version: |release|
+:License: Create Commons with attribution
+
+************************
+  Desenhando a Arquitetura da Aplicação (GEO - JEE6)
+************************
+   
+.. contents::
