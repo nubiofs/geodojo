@@ -73,7 +73,7 @@
             Nome: <h:inputText value="#{pontoManager.ponto.nome}" />
             <m:map width="512px" height="256px" options="{controls:[]}">
                 <m:wmsLayer name="OpenLayers WMS" url="http://labs.metacarta.com/wms/vmap0" params="{layers:'basic'}" />
-                <m:inputVectorLayer name="Features" value="#{pontoManager.ponto.localizacao}" jsVariable="point" />
+                <m:inputVectorLayer name="Features" value="#{pontoManager.ponto.localizacao}" jsVariable="point" dropFeaturesBeforeDraw="true" />
                 <m:panelControl>
                     <m:navigationControl />
                     <m:zoomBoxControl />
