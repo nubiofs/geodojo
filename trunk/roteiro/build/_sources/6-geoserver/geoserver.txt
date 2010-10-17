@@ -1,0 +1,10 @@
+:Author: Rafael Soto
+:Author: Robert Anderson
+:Version: |release|
+:License: Create Commons with attribution
+
+************************
+  Serviço de Mapas na Web - Geoserver
+************************
+   
+.. contents::

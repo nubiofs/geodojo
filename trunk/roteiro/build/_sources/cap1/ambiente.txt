@@ -1,0 +1,79 @@
+:Author: Rafael Soto
+:Author: Robert Anderson
+:Version: |release|
+:License: Create Commons with attribution
+
+************************
+ Quick Start - OSGEO Live DVD/Maven/Eclipse/Tomcat ?
+************************
+   
+.. contents::
+
+Esta seção vai cobrir os passos para criação da estrutura inicial do projeto e ambiente de desenvolvimento.
+Para facilitar este tutorial, vamos utilizar uma máquina virtual baseada na distribuição OSGEO Live DVD.
+
+.. sidebar:: OSGEO Live DVD
+
+	O live DVD da OSGEO pode ser baixado facilmente através
+	do endereço http://live.osgeo.org/
+
+1- Criação do projeto maven
+
+1.1 - Abra o console de comandos da estação e crie a pasta do projeto
+
+mkdir ~/geodojo
+cd geodojo
+
+1.2 - Utilizando o software maven vamos criar um novo projeto maven onde iremos desenvolver a aplicação
+mvn archetype:generate
+Choose a number:83
+Choose a number: 1
+Define value for property 'groupId': org.latinoware.geodojo.app
+Define value for property 'artifactId': : geodojo
+Define value for property 'version': 1.0-SNAPSHOT:
+Define value for property 'package': org.latinoware.geodojo.app:
+Confirm properties configuration:
+groupId: org.latinoware.geodojo.app
+artifactId: geodojo
+version: 1.0-SNAPSHOT
+package: org.latinoware.geodojo.app
+Y: 
+
+1.3 - A partir do plugin do maven(mojo) vamos criar o nosso projeto WTP do eclipse.
+
+cd geodojo/
+mvn -Dwtpversion=1.5 eclipse:eclipse
+
+1.4 - A partir da pasta Desktop/geodojo_env do desktop vamos abrir o eclipse
+OBS: O workspace pode ser o padrao do linux.
+
+1.5 - Vamos importar o projeto do eclipse que foi criado pelo maven. Para tal devemos acionar File >> Import... >> General >> Existing Projects in Workspace >> Next
+
+1.6 - Em seguida devemos apontar para a pasta que criamos para o nosso projeto ~/geodojo/geodojo/. Note que o projeto geodojo deve aparecer na lista de projeto. Em seguida Finish. A partir deste ponto o nosso projeto do eclipse deverá estar pronto para edição.
+
+Obs: Caso o projeto apresente erros do tipo (Unbound classpath variable: 'M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar' in project 'geodojo') vamos precisar configurar a variavel M2_REPO para que o eclipse encontre os jars que o maven baixou para o seu repositorio local.
+
+Selecionar o projeto >> botão direito >> Properties >> Java Build Path >> Libraries >> Seleciona qualquer jar na listagem >> Edit >> Variable >> New
+
+Preencher os dados da variavel M2_REPO e apontar para o diretorio ~/.m2/repository que é o local padrão onde o maven deposita os jars baixados
+
+1.7 - Para finalizar esta etapa, vamos executar o programa no servidor de aplicação Tomcat
+
+Click direito no projeto >> Run As >> Run on Server
+
+Na sequencia devemos selecionar o nosso servidor de aplicação TOMCAT 6.0
+
+Informar o local onde está instalado o TOMCAT 6.0 Desktop/geodojo_env/tomcat6.0
+
+Finalizar a configuração e verificar a execução da aplicação
+
+Se tudo estiver correto a pagina inicial Hello World! deverá aparecer.
+
+
+Encerramentos este modulo do minicurso. No próximo módulo iremos abordar o banco de dados espacial Postgis assim como preparar a base de dados para aplicação. 
+
+
+
+
+
+

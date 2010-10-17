@@ -1,0 +1,39 @@
+Trabalhando com a base de dados postgis
+
+Neste capitulo do roteiro, iremos abordar questões relacionadas ao banco de dados postgis. Como não é objetivo do curso detalhar a fundo o postgis, a quem interessar segue o link de um excelente tutorial sobre o mesmo. http://pugs.postgresql.org/files/Introduction_to_PostGIS_v1.0.pdf
+
+1 - Criando uma nova base de dados
+
+Iremos criar uma base de dados para ser utilizada pelo nosso sistema. Para tal vamos utilizar a ferramenta de administração de bancos de dados postgres pgadmin.
+
+
+Vamos abrir a ferramenta
+
+
+Conectar ao banco (dois clicks em cima do banco localhost:5432)
+
+Criar um novo banco. Edit >> New >> Object >> New Database
+
+Definir o nome do novo banco(geodojo) e o template postgis.
+
+2 - Importando arquivos de dados geográficos (shapefile) para o postgis
+
+Para este passo vamos utilizar um conjunto de arquivos de dados geográficos obtidos através do repositório de dados geográfico do IBGE(Instituto Brasileiro de Geografia e Estatistica). A importação é feita através de uma ferramenta utilitária que acompanha o postgis chamada shp2pgsql. Através desta ferramenta, conseguimos gerar scripts contendo instruções SQL para a criação de uma tabela com os dados presentes no arquivo. 
+
+Vamos acessar a pasta que contem os arquivos a partir do console do linux
+
+cd /home/user/Desktop/GeoDojoEnv/shapefiles
+
+Vamos acessar a pasta que contem os dados de municipios brasileiros
+
+cd municipios
+
+Agora vamos executar o comando shp2pgsql
+
+<ADICIONAR COMANDO SHP2PGQL>
+
+
+
+
+
+

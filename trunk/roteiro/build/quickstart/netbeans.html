@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Netbeans Quickstart &mdash; GeoDOJO vGeoDOJO documentation</title>
+    <link rel="stylesheet" href="../_static/geotools-tutorial.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'GeoDOJO',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="header">
+        <div class="wrap">
+            <ul id="top-nav">
+                <li><a href="http://www.latinoware.org/">Latinoware 2010</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 accesskey="I">index</a></li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Netbeans Quickstart</a></li>
+      </ul>
+    </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="netbeans-quickstart">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">Netbeans Quickstart</a><a class="headerlink" href="#netbeans-quickstart" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#netbeans-quickstart" id="id2">Netbeans Quickstart</a><ul>
+<li><a class="reference internal" href="#welcome-netbeans-developers" id="id3">Welcome NetBeans Developers</a></li>
+<li><a class="reference internal" href="#java-install" id="id4">Java Install</a></li>
+<li><a class="reference internal" href="#netbeans-install" id="id5">NetBeans Install</a></li>
+<li><a class="reference internal" href="#quickstart" id="id6">Quickstart</a><ul>
+<li><a class="reference internal" href="#creating-the-project" id="id7">Creating the Project</a></li>
+<li><a class="reference internal" href="#adding-jars-to-your-project" id="id8">Adding Jars to Your Project</a></li>
+<li><a class="reference internal" href="#quickstart-application" id="id9">Quickstart Application</a></li>
+<li><a class="reference internal" href="#running-the-application" id="id10">Running the Application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#things-to-try" id="id11">Things to Try</a></li>
+<li><a class="reference internal" href="#maven-alternative" id="id12">Maven Alternative</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="welcome-netbeans-developers">
+<h2><a class="toc-backref" href="#id3">Welcome NetBeans Developers</a><a class="headerlink" href="#welcome-netbeans-developers" title="Permalink to this headline">¶</a></h2>
+<p>Welcome to Geospatial for Java -this workbook is aimed at Java developers who are new to geospatial
+and would like to get started.</p>
+<p>We are going to start out carefully with the steps needed to set up your IDE; and are pleased this
+year to cover both NetBeans and Eclipse. The build tool Maven (<a class="reference external" href="http://maven.apache.org/">http://maven.apache.org/</a>) is our
+preferred option for downloading and managing jars for GeoTools projects because there tend to a
+large number of jars involved. If you are already familiar with Maven that is an advantage but if
+not, don&#8217;t worry, we will be explaining things step by step and we will also document how to set
+up things by hand as an alternative to using Maven.</p>
+<p>Extra care has been taken to make this year&#8217;s tutorial visual right from the get go. While these
+examples will make use of Swing please be assured that that this is only an aid in making the
+examples easy and fun to use so if your own work is based on another GUI framework the material
+that we cover here will still be relevant.</p>
+<p>These sessions are applicable to both server side and client side development.</p>
+<p>We would like thank members of the GeoTools users list for their feedback while were preparing the
+course material, with special thanks to Tom Williamson for reviewing early drafts.</p>
+</div>
+<div class="section" id="java-install">
+<h2><a class="toc-backref" href="#id4">Java Install</a><a class="headerlink" href="#java-install" title="Permalink to this headline">¶</a></h2>
+<p>We are going to be making use of Java so if you don&#8217;t have a Java Development Kit installed now is
+the time to do so. Even if you have Java installed already check out the optional Java Advanced
+Imaging and Java Image IO section – both of these libraries are used by GeoTools.</p>
+<ol class="arabic">
+<li><p class="first">Download the latest JDK from the the java.sun.com website:</p>
+<p><a class="reference external" href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a></p>
+</li>
+<li><p class="first">At the time of writing the latest JDK was:</p>
+<p>jdk-6u20-windows-i586.exe</p>
+</li>
+<li><p class="first">Click through the installer you will need to set an acceptance a license agreement and so forth.
+By default this will install to:</p>
+<p>C:\Program Files\Java\jdk1.6.0_20\</p>
+</li>
+<li><p class="first">Optional – Java Advanced Imaging is used by GeoTools for raster support. If you install JAI 1.1.3
+performance will be improved:</p>
+<p><a class="reference external" href="https://jai.dev.java.net/binary-builds.html">https://jai.dev.java.net/binary-builds.html</a></p>
+<p>Both a JDK and JRE installer are available:</p>
+<ul class="simple">
+<li>jai-1_1_3-lib-windows-i586-jdk.exe</li>
+<li>jai-1_1_3-lib-windows-i586-jre.exe</li>
+</ul>
+</li>
+<li><p class="first">Optional – ImageIO Is used to read and write raster files. GeoTools uses version 1_1 of the
+ImageIO library:</p>
+<p><a class="reference external" href="https://jai-imageio.dev.java.net/binary-builds.html">https://jai-imageio.dev.java.net/binary-builds.html</a></p>
+<p>Both a JDK and JRE installer are available:</p>
+<ul class="simple">
+<li>jai_imageio-1_1-lib-windows-i586-jdk.exe</li>
+<li>jai_imageio-1_1-lib-windows-i586-jre.exe</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="netbeans-install">
+<h2><a class="toc-backref" href="#id5">NetBeans Install</a><a class="headerlink" href="#netbeans-install" title="Permalink to this headline">¶</a></h2>
+<p>The NetBeans IDE is a popular choice for Java development and features excellent Maven integration.</p>
+<ol class="arabic">
+<li><p class="first">Download NetBeans (The Java SE download will be fine).</p>
+<blockquote>
+<p><a class="reference external" href="http://www.netbeans.org/">http://www.netbeans.org/</a></p>
+</blockquote>
+</li>
+<li><p class="first">At the time of netbeans-6.9-ml-javase-windows.exe was the latest installer.</p>
+</li>
+<li><p class="first">Click through the steps of the installer. You will notice it will pick up on the JDK you
+installed earlier.</p>
+<a class="reference internal image-reference" href="../_images/netbeansInstall.png"><img alt="../_images/netbeansInstall.png" src="../_images/netbeansInstall.png" /></a>
+</li>
+</ol>
+</div>
+<div class="section" id="quickstart">
+<h2><a class="toc-backref" href="#id6">Quickstart</a><a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>The GeoTools development community uses the build tool Maven which is integrated into the latest
+releases of NetBeans.</p>
+<p>The advantages of using Maven are:</p>
+<ul class="simple">
+<li>You only download as much of GeoTools as your application requires Jars are downloaded to a single
+location in your home directory (in a hidden folder called .m2/repository)</li>
+<li>Source code and javadocs are automatically downloaded and hooked up</li>
+</ul>
+<p>Although Maven is a build tool it works by describing the contents of a project. This is a different
+approach then used by the Make or Ant tools which list the steps required to build.</p>
+<p>Part of the description of a project is the required jars and a repository on the internet where
+they can be downloaded from. We will be using these facilities to bring GeoTools jars as needed
+into our project.</p>
+<div class="section" id="creating-the-project">
+<h3><a class="toc-backref" href="#id7">Creating the Project</a><a class="headerlink" href="#creating-the-project" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s get started:</p>
+<ol class="arabic">
+<li><p class="first">Start with <em class="menuselection">File ‣ New Project</em> to open the <strong>New Project</strong> wizard</p>
+</li>
+<li><p class="first">Select the Maven category; choose Maven Project and press <strong>Next</strong>.</p>
+<a class="reference internal image-reference" href="../_images/nbNewProject.png"><img alt="../_images/nbNewProject.png" src="../_images/nbNewProject.png" /></a>
+</li>
+<li><p class="first">On the Maven Archetype page select “Maven Quickstart Archetype” and press Next.</p>
+<a class="reference internal image-reference" href="../_images/nbNewProjectArchetype.png"><img alt="../_images/nbNewProjectArchetype.png" src="../_images/nbNewProjectArchetype.png" /></a>
+</li>
+<li><p class="first">We can now fill in the blanks</p>
+<ul class="simple">
+<li>Project name: tutorial</li>
+<li>GroupId: org.geotools</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/nbNameAndLocation.png"><img alt="../_images/nbNameAndLocation.png" src="../_images/nbNameAndLocation.png" /></a>
+</li>
+<li><p class="first">Click on the Finish button and the new project will be created.</p>
+</li>
+<li><p class="first">If this is your first time using Maven with NetBeans it will want to confirm that it is okay to
+use the copy of Maven included with NetBeans (it is also possible to use an external Maven
+executable from within Netbeans which is convenient if, for instance, you want to work with the
+same version of Maven within the IDE and from the command line).</p>
+</li>
+</ol>
+</div>
+<div class="section" id="adding-jars-to-your-project">
+<h3><a class="toc-backref" href="#id8">Adding Jars to Your Project</a><a class="headerlink" href="#adding-jars-to-your-project" title="Permalink to this headline">¶</a></h3>
+<div class="sidebar">
+<p class="first sidebar-title">Lab</p>
+<p>Your local maven repository has already been
+populated with geotools allowing the use of &#8220;offline&#8221; mode.</p>
+<ol class="last arabic simple">
+<li>Open <em class="menuselection">Windows ‣ Preferences</em></li>
+<li>Select <em class="guilabel">Maven</em> preference page</li>
+<li>Ensure <em class="guilabel">offline</em> is checked</li>
+</ol>
+</div>
+<p>The <em>pom.xml</em> file is used to describe the care and feeding of your maven project; we are going to
+focus on the dependencies needed for your project</p>
+<p>When downloading jars maven makes use of a &#8220;local repository&#8221; to store jars.</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">PLATFORM</th>
+<th class="head">LOCAL REPOSITORY</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Windows XP:</td>
+<td><tt class="file docutils literal"><span class="pre">C:\Documents</span> <span class="pre">and</span> <span class="pre">Settings\Jody\.m2\repository</span></tt></td>
+</tr>
+<tr><td>Windows:</td>
+<td><tt class="file docutils literal"><span class="pre">C:\Users\Jody\.m2\repository</span></tt></td>
+</tr>
+<tr><td>Linux and Mac:</td>
+<td><tt class="file docutils literal"><span class="pre">~/.m2/repository</span></tt></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>When downloading jars maven makes use of public maven repositories on the internet where projects
+such as GeoTools publish their work.</p>
+<ol class="arabic">
+<li><p class="first">The next step is for us to make it a GeoTools project by adding information to Maven&#8217;s project
+description file (“project object model” in Maven-speak) - pom.xml</p>
+<p>In the Projects panel open up the Project Files folder and double click on pom.xml to open it.</p>
+</li>
+<li><p class="first">We are going to start by defining the version number of GeoTools we wish to use.</p>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;geotools.version&gt;</span>2.7-M2<span class="nt">&lt;/geotools.version&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+</pre></div>
+</div>
+<p>If you make any mistakes when editing the xml file you&#8217;ll see that your project will be renamed
+“&lt;Badley formed Maven project&gt;” in the Projects window. You can choose “Format” as a quick way to
+check if the tags line up. Or just hit undo and try again.</p>
+</li>
+<li><p class="first">Next we add two GeoTools modules to the dependencies section: gt-shapefile and gt-swing for our
+project.</p>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.geotools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>gt-shapefile<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${geotools.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.geotools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>gt-swing<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${geotools.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">And the repositories where these jars can be downloaded from.</p>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>maven2-repository.dev.java.net<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Java.net repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.java.net/maven/2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>osgeo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Open Source Geospatial Foundation Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.osgeo.org/webdav/geotools/<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;/repositories&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can now right click on Libraries in the Projects window, then Download missing Dependencies
+from the pop-up menu. When downloading it will check the repositories we have listed
+above.</p>
+</li>
+<li><p class="first">We will continue to add dependencies on different parts of the GeoTools library as we work through these exercises; this fine grain control and the ability to download exactly what is needed is one of the advantages of using Maven.</p>
+</li>
+<li><p class="first">Here is what the completed <tt class="file docutils literal"><span class="pre">pom.xml</span></tt> looks like:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span>
+    <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.geotools<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>tutorial<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+    <span class="nt">&lt;name&gt;</span>tutorial<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;geotools.version&gt;</span>2.7-M2<span class="nt">&lt;/geotools.version&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.geotools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>gt-shapefile<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${geotools.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.geotools<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>gt-swing<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>${geotools.version}<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>maven2-repository.dev.java.net<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Java.net repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.java.net/maven/2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>osgeo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Open Source Geospatial Foundation Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.osgeo.org/webdav/geotools/<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;/repositories&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>You may find cutting and pasting from the documentation to be easier then typing.</li>
+<li>You may also <a class="reference download internal" href="../_downloads/pom.xml"><tt class="xref download docutils literal"><span class="pre">download</span> <span class="pre">this</span> <span class="pre">file</span></tt></a></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="quickstart-application">
+<h3><a class="toc-backref" href="#id9">Quickstart Application</a><a class="headerlink" href="#quickstart-application" title="Permalink to this headline">¶</a></h3>
+<p>Now that your environment is setup we can put together a simple Quickstart. This example will display a shapefile on screen.</p>
+<ol class="arabic">
+<li><p class="first">Create the org.geotools.tutorial.Quickstart class using your IDE.</p>
+</li>
+<li><p class="first">Fill in the following code:</p>
+</li>
+<li><p class="first">Build the application and check that all is well in the Output window.</p>
+<a class="reference internal image-reference" href="../_images/nbQuickstart.png"><img alt="../_images/nbQuickstart.png" src="../_images/nbQuickstart.png" /></a>
+<p>A fair bit of time will be spent downloading the libraries required.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="running-the-application">
+<h3><a class="toc-backref" href="#id10">Running the Application</a><a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">We need to download some sample data to work with. The <a class="reference external" href="http://www.naturalearthdata.com/">http://www.naturalearthdata.com/</a> project
+is a great project supported by the North American Cartographic Information Society.</p>
+<ul class="simple">
+<li><a class="reference external" href="http//www.naturalearthdata.com/download/110m/cultural/110m-cultural.zip">110m-cultural.zip</a></li>
+</ul>
+<p>Please unzip the above data into a location you can find easily such as the desktop.</p>
+</li>
+<li><p class="first">Run the application to open a file chooser. Choose a shapefile from the example dataset.</p>
+<a class="reference internal image-reference" href="../_images/QuickstartOpen.jpg"><img alt="../_images/QuickstartOpen.jpg" src="../_images/QuickstartOpen.jpg" /></a>
+</li>
+<li><p class="first">The application will connect to your shapefile, 1.produce a map context and display the shapefile.</p>
+<a class="reference internal image-reference" href="../_images/QuickstartMap.jpg"><img alt="../_images/QuickstartMap.jpg" src="../_images/QuickstartMap.jpg" /></a>
+</li>
+<li><p class="first">A couple of things to note about the code example:</p>
+<ul class="simple">
+<li>The shapefile is not loaded into memory – instead it is read from disk each and every time it is needed
+This approach allows you to work with data sets larger then available memory.</li>
+<li>We are using a very basic display style here that just shows feature outlines. In the examples that follow we will see how to specify more sophisticated styles.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="things-to-try">
+<h2><a class="toc-backref" href="#id11">Things to Try</a><a class="headerlink" href="#things-to-try" title="Permalink to this headline">¶</a></h2>
+<p>Each tutorial consists of very detailed steps followed by a series of extra questions. If you get
+stuck at any point please ask your instructor; or sign up to the geotools-users email list.</p>
+<p>Here are some additional challenges for you to try:</p>
+<ul>
+<li><p class="first">Try out the different sample data sets</p>
+</li>
+<li><p class="first">You can zoom in, zoom out and show the full extents and Use the select tool to examine individual
+countries in the sample countries.shp file</p>
+</li>
+<li><p class="first">Download the largest shapefile you can find and see how quickly it can be rendered. You should
+find that the very first time it will take a while as a spatial index is generated. After that
+performance should be very good when zoomed in.</p>
+</li>
+<li><p class="first">Fast: We know that one of the ways people select a spatial library is based on speed. By design
+GeoTools does not load the above shapefile into memory (instead it streams it off of disk
+each time it is drawn using a spatial index to only bring the content required for display).</p>
+<p>If you would like to ask GeoTools to cache the shapefile in memory try the following code:</p>
+<p>For the above example to compile you will need the following import:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">org.geotools.data.CachingFeatureSource</span><span class="o">;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Try and sort out what all the different “side car” files are – and what they are for. The sample
+data set includes “shp”, “dbf” and “shx”. How many other side car files are there?</p>
+</li>
+<li><p class="first">Advanced: The use of FileDataStoreFinder allows us to work easily with files. The other way to do
+things is with a map of connection parameters. This techniques gives us a little more control over
+how we work with a shapefile and also allows us to connect to databases and web feature servers.</p>
+</li>
+<li><p class="first">Important: GeoTools is an active open source project – you can quickly use maven to try out the
+latest nightly build by changing your pom.xml file to use a “SNAPSHOT” release.</p>
+<p>At the time of writing GeoDOJO-SNAPSHOT under active development.</p>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+        <span class="nt">&lt;geotools.version&gt;</span>2.7-SNAPSHOT<span class="nt">&lt;/geotools.version&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+</pre></div>
+</div>
+<p>You will also need to change your pom.xml file to include the following snapshot repository:</p>
+<div class="highlight-xml"><div class="highlight"><pre>    <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>maven2-repository.dev.java.net<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Java.net repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.java.net/maven/2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>osgeo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Open Source Geospatial Foundation Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.osgeo.org/webdav/geotools/<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;snapshots&gt;</span>
+                <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;/snapshots&gt;</span>
+            <span class="nt">&lt;id&gt;</span>opengeo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;name&gt;</span>OpenGeo Maven Repository<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://repo.opengeo.org<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+    <span class="nt">&lt;/repositories&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">NetBeans has an interesting feature to show how the dependency system works - Right click on
+Libraries and choose Show Dependency</p>
+<img alt="../_images/nbGraph.png" src="../_images/nbGraph.png" />
+<p>We will be making use of some of the project is greater depth in the remaining tutorials.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="maven-alternative">
+<h2><a class="toc-backref" href="#id12">Maven Alternative</a><a class="headerlink" href="#maven-alternative" title="Permalink to this headline">¶</a></h2>
+<p>The alternative to using Maven to download and manage jars for you is to manually install them.
+To start with we will obtain GeoTools from the website:</p>
+<ol class="arabic">
+<li><p class="first">Download the GeoTools binary release from <a class="reference external" href="http://sourceforge.net/projects/geotools/files">http://sourceforge.net/projects/geotools/files</a></p>
+</li>
+<li><p class="first">Extract the geotools-2.6.0-bin.zip file to C:javageotools-2.6.0 folder.</p>
+</li>
+<li><p class="first">If you open up the folder and have a look you will see GeoTools and all of the other jars that
+it uses including those from other libraries such as GeoAPI and JTS.</p>
+<img alt="../_images/gtunzipped.jpg" src="../_images/gtunzipped.jpg" />
+</li>
+<li><p class="first">We can now set up GeoTools as a library in NetBeans:</p>
+<p>From the menu bar choose Tools &gt; Libraries to open the Library Manager.</p>
+</li>
+<li><p class="first">From the Library Manager press the New Library button.</p>
+</li>
+<li><p class="first">Enter “GeoTools” for the Library Name and press OK</p>
+</li>
+<li><p class="first">You can now press the Add JAR/Folder button and add in all the jars from C:javaGeoTools-GeoDOJO</p>
+</li>
+<li><p class="first">GeoTools includes a copy of the “EPSG” map projections database; but also allows you to hook up
+your own copy of the EPSG database as an option. However, only one copy can be used at a time
+so we will need to remove the following jars from the Library Manager:</p>
+</li>
+</ol>
+<div class="sidebar">
+<p class="first sidebar-title">EPSG</p>
+<p>The EPSG databaes is distributed as an Access database and has been converted into the pure java
+database HSQL for our use.</p>
+<ul class="last simple">
+<li>gt-epsg-h2</li>
+<li>gt-epsg-oracle</li>
+<li>gt-epsg-postgresql</li>
+<li>gt-epsg-wkt-2.6</li>
+</ul>
+</div>
+<ol class="arabic" start="9">
+<li><p class="first">GeoTools allows you to work with many different databases; however to make them work you will
+need to download jdbc drivers from the manufacturer.</p>
+<p>For now remove the following plugins from the Library Manager:</p>
+<ul class="simple">
+<li>gt-arcsde</li>
+<li>gt-arcsde-common</li>
+<li>gt-db2</li>
+<li>gt-jdbc-db2</li>
+<li>gt-oracle-spatial</li>
+<li>gt-jdbc-oracle</li>
+</ul>
+</li>
+<li><p class="first">We are now ready to proceed with creating an example project. Select File &gt; New Project</p>
+</li>
+<li><p class="first">Choose the default “Java Application”</p>
+</li>
+<li><p class="first">Fill in “Tutorial” as the project name; and our initial Main class will be called “Quickstart”.</p>
+</li>
+<li><p class="first">Open up Example in the Projects window, right click on Libraries and select Add Libraries.
+Choose GeoTools from the Add Library dialog.</p>
+</li>
+<li><p class="first">Congratulations ! You can now return to Quickstart or any of the other tutorials</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <ul id="breadcrumbs">
+            <li class="right" style="margin-right: 10px">
+              <a href="../genindex.html" title="General Index"
+                 >index</a></li>
+        <li><a href="../index.html">GeoDOJO vGeoDOJO documentation</a> &raquo;</li>
+        <li><a href="#">Netbeans Quickstart</a></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2010, Rafael Soto e Robert Anderson.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>
