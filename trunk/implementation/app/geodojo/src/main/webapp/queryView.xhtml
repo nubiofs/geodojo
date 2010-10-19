@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:m="http://www.ol4jsf.org">
+
+    <h:head>
+    </h:head>
+    <body>
+        <h1>Query View</h1>
+        <h:form prependId="false">
+            <h:panelGroup id="mapPanel" layout="block">
+                <m:map width="512px" height="256px" renderOnWindowLoad="false">
+                    <m:wmsLayer name="OpenLayers WMS" url="http://labs.metacarta.com/wms/vmap0" params="{layers:'basic'}" />
+                    <m:vectorLayer name="Query Result" value="#{queryViewManager.wkts}" />
+                    <m:layerSwitcherControl />
+                    <m:mousePositionControl></m:mousePositionControl>
+                    <m:scaleLineControl></m:scaleLineControl>
+                </m:map>
+            </h:panelGroup>
+            <h:messages id="msg" globalOnly="true">
+            </h:messages>
+            <fieldset>
+                <legend>Consultas espaciais</legend>
+                <h:selectOneRadio id="qryLanguage" value="#{queryViewManager.qryLanguage}">
+                    <f:selectItem itemLabel="Postgis" itemValue="POSTGIS"></f:selectItem>
+                    <f:selectItem itemLabel="HQL" itemValue="HQL"></f:selectItem>
+                </h:selectOneRadio>
+                <h:inputTextarea id="inputQuery" value="#{queryViewManager.query}" cols="60" rows="10"></h:inputTextarea>
+                <p>
+                    <h:commandButton value="Executar Consulta" action="#{queryViewManager.executeQuery}">
+                        <f:ajax execute="@this inputQuery qryLanguage" render="mapPanel msg"/>
+                    </h:commandButton>
+                </p>
+            </fieldset>
+        </h:form>
+    </body>
+</html>
