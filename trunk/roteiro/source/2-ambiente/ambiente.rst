@@ -3,9 +3,9 @@
 :Version: |release|
 :License: Create Commons with attribution
 
-************************
+***************************************************
  Quick Start - OSGEO Live DVD/Maven/Eclipse/Tomcat
-************************
+***************************************************
    
 .. contents::
 

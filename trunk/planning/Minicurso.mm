@@ -19,8 +19,8 @@
 </node>
 <node CREATED="1287068092877" ID="Freemind_Link_1064252228" MODIFIED="1287068166239" TEXT="Pontos Positivos e Negativos"/>
 </node>
-<node CREATED="1286331534900" FOLDED="true" ID="Freemind_Link_1271854733" MODIFIED="1287240475671" POSITION="right" TEXT="Apresenta&#xe7;&#xe3;o do Sistemas a ser desenvolvido(Robert)">
-<node CREATED="1286818970903" FOLDED="true" ID="Freemind_Link_1661852310" MODIFIED="1286818974843" TEXT="Spatial Twitter">
+<node CREATED="1286331534900" ID="Freemind_Link_1271854733" MODIFIED="1287240475671" POSITION="right" TEXT="Apresenta&#xe7;&#xe3;o do Sistemas a ser desenvolvido(Robert)">
+<node CREATED="1286818970903" ID="Freemind_Link_1661852310" MODIFIED="1286818974843" TEXT="Spatial Twitter">
 <node CREATED="1286818976492" ID="Freemind_Link_132979587" MODIFIED="1287240488398" TEXT="Envio de um twitt com coordenadas espaciais (CRUD c/ Mapa)"/>
 <node CREATED="1286819022331" ID="Freemind_Link_102247473" MODIFIED="1286819104082" TEXT="Apresenta no mapa a partir de uma hashtag todos os twitts que contem dados espaciais e a localiza&#xe7;&#xe3;o do individuo"/>
 </node>
@@ -76,7 +76,7 @@
 <node CREATED="1287239397072" ID="Freemind_Link_160341688" MODIFIED="1287239408483" TEXT="Cria&#xe7;&#xe3;o de uma view para ser consumida pelo geoserver"/>
 </node>
 </node>
-<node CREATED="1286332155071" FOLDED="true" ID="Freemind_Link_1570963329" MODIFIED="1287240535229" POSITION="right" TEXT="Discutindo arquitetura da aplica&#xe7;&#xe3;o(JEE6) - (Robert)">
+<node CREATED="1286332155071" FOLDED="true" ID="Freemind_Link_1570963329" MODIFIED="1287341160360" POSITION="right" TEXT="Discutindo arquitetura da aplica&#xe7;&#xe3;o(JEE6) - (Robert)">
 <node CREATED="1286332475979" ID="Freemind_Link_1370717384" MODIFIED="1286332482908" TEXT="Camada de Dados">
 <node CREATED="1286333046548" ID="Freemind_Link_1290627464" MODIFIED="1286333060036" TEXT="HibernateSpatial">
 <node CREATED="1286409787529" ID="Freemind_Link_1409993044" MODIFIED="1286409788781" TEXT="JTS"/>
