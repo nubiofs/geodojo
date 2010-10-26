@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="GeoDOJO vGeoDOJO documentation" href="../index.html" />
+    <link rel="next" title="Serviço de Mapas na Web - Geoserver" href="../6-geoserver/geoserver.html" />
     <link rel="prev" title="Desenhando a Arquitetura da Aplicação (GEO - JEE6)" href="../4-arquitetura/arquitetura.html" /> 
   </head>
   <body>
@@ -39,6 +40,9 @@
             <li class="right" style="margin-right: 10px">
               <a href="../genindex.html" title="General Index"
                  accesskey="I">index</a></li>
+            <li class="right" >
+              <a href="../6-geoserver/geoserver.html" title="Serviço de Mapas na Web - Geoserver"
+                 accesskey="N">next</a> |</li>
             <li class="right" >
               <a href="../4-arquitetura/arquitetura.html" title="Desenhando a Arquitetura da Aplicação (GEO - JEE6)"
                  accesskey="P">previous</a> |</li>
@@ -57,8 +61,193 @@
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#persistencia-de-dados-espacial-hibernate-spatial" id="id1">Persistência de Dados Espacial - Hibernate Spatial</a></li>
+<li><a class="reference internal" href="#persistencia-de-dados-espacial-hibernate-spatial" id="id1">Persistência de Dados Espacial - Hibernate Spatial</a><ul>
+<li><a class="reference internal" href="#configurando-o-projeto-com-hibernatespatial-e-postgis" id="id2">Configurando o projeto com HibernateSpatial e Postgis</a></li>
 </ul>
+</li>
+</ul>
+</div>
+<p>Não é novidade para nenhum desenvolvedor do mundo java falar sobre tecnologia ORM(Object-relational mapping). O hibernate, um dos frameworks mais consagrados do mercado, trouxe um avanço impar para o mundo do desenvolvimento de software quando o assunto é banco de dados relacional e aplicações orientadas a objetos. Podemos contar com os dedos os projetos que atualmente não utilizam este tipo de tecnologia para acesso a bancos de dados relacionais no mundo java. O hibernate fez tanto sucesso no mundo corporativo que terminou se tornando a base para a especificação Java Persistence API (JPA).</p>
+<p>Apesar de prestar suporte para os mais diversos players de banco de dados do mundo, o hibernate não possui suporte explicito para o trato com dados geográficos oriundo das bases de dados geográficas. Para solucionar este problema, foi desenvolvida uma extensão genérica para o hibernate capaz de fazer o mesmo entender e tratar dados geográficos. Utilizando o hibernate spatial, trazemos para as nossas aplicações todo o potencial do framework hibernate para trabalhar com dados tradicionais e tambem dados geográfico de uma forma padronizada e transparente. Queries polimorficas, cross-database, mapeamento de heranças, cache de segundo nível e demais funcionalidades agregadas ao tratamento nativo dos dados geográficos torna o hibernate spatial uma das melhores opções para as aplicações geojava.</p>
+<p>Neste capitulo vamos configurar o nosso projeto java para trabalhar com o hibernate spatial, JPA e postgis. Vamos mapear algumas classes para a nossa aplicação incluindo os mapeamentos de dados geográficos, criar as operações de CRUD e exemplificar algumas queries.</p>
+<div class="section" id="configurando-o-projeto-com-hibernatespatial-e-postgis">
+<h2><a class="toc-backref" href="#id2">Configurando o projeto com HibernateSpatial e Postgis</a><a class="headerlink" href="#configurando-o-projeto-com-hibernatespatial-e-postgis" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Atualizar o nosso arquivo pom.xml com os seguintes itens:</p>
+<blockquote>
+<ul class="simple">
+<li>Repositórios de dependencias</li>
+<li>Dependencias</li>
+<li>Diretivas de compilação do projeto</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.latinoware.geodojo.app<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>geodojo<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>geodojo Maven Webapp<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;url&gt;</span>http://www.latinoware.org<span class="nt">&lt;/url&gt;</span>
+  
+  
+  <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>OSGEO GeoTools repo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://download.osgeo.org/webdav/geotools<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>Hibernate Spatial repo<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://www.hibernatespatial.org/repository<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+            <span class="nt">&lt;id&gt;</span>JBOSS<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;url&gt;</span>http://repository.jboss.com/maven2<span class="nt">&lt;/url&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>		      
+    <span class="nt">&lt;/repositories&gt;</span>
+
+  
+  
+  
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>4.0<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    
+    	<span class="c">&lt;!-- JPA/Hibernate --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>hibernate<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>hibernate-entitymanager<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>3.4.0.GA<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-simple<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.5.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.5.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+        <span class="c">&lt;!-- Hibernate Spatial Postgis --&gt;</span>     
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.hibernatespatial<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>hibernate-spatial-postgis<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+		<span class="c">&lt;!-- Postgis JDBC driver --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.postgis<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>postgis-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.3.3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+		<span class="c">&lt;!-- Postgresql JDBC driver --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>postgresql<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>postgresql<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>8.4-701.jdbc3<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    
+    
+  <span class="nt">&lt;/dependencies&gt;</span>
+  
+  
+    <span class="nt">&lt;properties&gt;</span>
+        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+    <span class="nt">&lt;/properties&gt;</span>
+
+    <span class="nt">&lt;build&gt;</span>
+    	<span class="nt">&lt;finalName&gt;</span>geodojo<span class="nt">&lt;/finalName&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+            <span class="nt">&lt;plugin&gt;</span>
+                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                    <span class="nt">&lt;source&gt;</span>1.6<span class="nt">&lt;/source&gt;</span>
+                    <span class="nt">&lt;target&gt;</span>1.6<span class="nt">&lt;/target&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">Atualizar o projeto do eclipse com as novas dependencias:</p>
+<div class="highlight-python"><pre>$ mvn eclipse:eclipse
+
+-&gt; F5 no projeto geodojo do eclipse</pre>
+</div>
+</li>
+</ol>
+<img alt="../_images/libraries.png" src="../_images/libraries.png" />
+<ol class="arabic simple" start="3">
+<li>Criar a classe de teste <em>org.latinoware.geodojo.app.teste.TestaFabricarEntityManager</em> e executar</li>
+</ol>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">teste</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.EntityManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Persistence</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestaFabricarEntityManager</span> <span class="o">{</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testEntityManagerFactory</span><span class="o">()</span>
+	<span class="o">{</span>
+				
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">&quot;geodojodbspatial&quot;</span><span class="o">).</span><span class="na">createEntityManager</span><span class="o">().</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+			
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			
+			<span class="n">Assert</span><span class="o">.</span><span class="na">fail</span><span class="o">();</span>
+		<span class="o">}</span>
+
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Criar o arquivo <em>persistence.xml</em> no diretório resource/META-INF/persistence.xml</li>
+</ol>
+<img alt="../_images/metainf.png" src="../_images/metainf.png" />
+<ol class="arabic simple" start="5">
+<li>Incluir o conteudo com as configurações da base de dados</li>
+</ol>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;persistence</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/persistence&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd&quot;</span><span class="nt">&gt;</span>
+
+	<span class="nt">&lt;persistence-unit</span> <span class="na">name=</span><span class="s">&quot;geodojodbspatial&quot;</span> <span class="na">transaction-type=</span><span class="s">&quot;RESOURCE_LOCAL&quot;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;properties&gt;</span>
+			<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.dialect&quot;</span> <span class="na">value=</span><span class="s">&quot;org.hibernatespatial.postgis.PostgisDialect&quot;</span> <span class="nt">/&gt;</span>
+			<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.connection.url&quot;</span> <span class="na">value=</span><span class="s">&quot;jdbc:postgresql://localhost:5432/geodojo&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.connection.driver_class&quot;</span> <span class="na">value=</span><span class="s">&quot;org.postgresql.Driver&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.connection.password&quot;</span> <span class="na">value=</span><span class="s">&quot;user&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.connection.username&quot;</span> <span class="na">value=</span><span class="s">&quot;user&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;hibernate.hbm2ddl.auto&quot;</span> <span class="na">value=</span><span class="s">&quot;none&quot;</span> <span class="nt">/&gt;</span>		
+		<span class="nt">&lt;/properties&gt;</span>
+	<span class="nt">&lt;/persistence-unit&gt;</span>
+<span class="nt">&lt;/persistence&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>Se tudo estiver correto, o teste deve dar OK(verde)</li>
+</ol>
+<img alt="../_images/testEntityManager.png" src="../_images/testEntityManager.png" />
 </div>
 </div>
 
@@ -72,6 +261,9 @@
             <li class="right" style="margin-right: 10px">
               <a href="../genindex.html" title="General Index"
                  >index</a></li>
+            <li class="right" >
+              <a href="../6-geoserver/geoserver.html" title="Serviço de Mapas na Web - Geoserver"
+                 >next</a> |</li>
             <li class="right" >
               <a href="../4-arquitetura/arquitetura.html" title="Desenhando a Arquitetura da Aplicação (GEO - JEE6)"
                  >previous</a> |</li>

@@ -3,8 +3,57 @@
 :Version: |release|
 :License: Create Commons with attribution
 
-************************
+****************************************************
   Persistência de Dados Espacial - Hibernate Spatial
-************************
+****************************************************
    
 .. contents::
+
+
+Não é novidade para nenhum desenvolvedor do mundo java falar sobre tecnologia ORM(Object-relational mapping). O hibernate, um dos frameworks mais consagrados do mercado, trouxe um avanço impar para o mundo do desenvolvimento de software quando o assunto é banco de dados relacional e aplicações orientadas a objetos. Podemos contar com os dedos os projetos que atualmente não utilizam este tipo de tecnologia para acesso a bancos de dados relacionais no mundo java. O hibernate fez tanto sucesso no mundo corporativo que terminou se tornando a base para a especificação Java Persistence API (JPA).
+
+Apesar de prestar suporte para os mais diversos players de banco de dados do mundo, o hibernate não possui suporte explicito para o trato com dados geográficos oriundo das bases de dados geográficas. Para solucionar este problema, foi desenvolvida uma extensão genérica para o hibernate capaz de fazer o mesmo entender e tratar dados geográficos. Utilizando o hibernate spatial, trazemos para as nossas aplicações todo o potencial do framework hibernate para trabalhar com dados tradicionais e tambem dados geográfico de uma forma padronizada e transparente. Queries polimorficas, cross-database, mapeamento de heranças, cache de segundo nível e demais funcionalidades agregadas ao tratamento nativo dos dados geográficos torna o hibernate spatial uma das melhores opções para as aplicações geojava.
+
+Neste capitulo vamos configurar o nosso projeto java para trabalhar com o hibernate spatial, JPA e postgis. Vamos mapear algumas classes para a nossa aplicação incluindo os mapeamentos de dados geográficos, criar as operações de CRUD e exemplificar algumas queries.
+
+##########################################################
+Configurando o projeto com HibernateSpatial e Postgis
+##########################################################
+
+1. Atualizar o nosso arquivo pom.xml com os seguintes itens:
+	
+	* Repositórios de dependencias
+	* Dependencias
+	* Diretivas de compilação do projeto
+	
+.. literalinclude:: artifacts/pom.xml
+     :language: xml
+
+2. Atualizar o projeto do eclipse com as novas dependencias::
+
+	$ mvn eclipse:eclipse
+	
+	-> F5 no projeto geodojo do eclipse
+	
+	
+.. image:: images/libraries.png
+
+3. Criar a classe de teste *org.latinoware.geodojo.app.teste.TestaFabricarEntityManager* e executar
+
+.. literalinclude:: artifacts/TestaFabricaEntityManager.java
+     :language: java	
+	
+4. Criar o arquivo *persistence.xml* no diretório resource/META-INF/persistence.xml
+
+.. image:: images/metainf.png
+
+5. Incluir o conteudo com as configurações da base de dados
+
+.. literalinclude:: artifacts/persistence.xml
+     :language: xml
+
+6. Se tudo estiver correto, o teste deve dar OK(verde)
+
+.. image:: images/testEntityManager.png
+	
+	

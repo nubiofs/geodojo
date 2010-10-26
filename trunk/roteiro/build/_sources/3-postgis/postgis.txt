@@ -434,6 +434,7 @@ Calculando quantos KM de rodovias o estado do Rio de Janeiro possui
 	WHERE uf.nome = 'RJ' AND rodovia.sigla like '%BR%' AND ST_INTERSECTS(rodovia.the_geom,uf.the_geom)
 	GROUP BY rodovia.sigla, rodovia.the_geom, uf.the_geom
 	
-	
+
+Finalizamos os trabalhos desta etapa com o postgis. Na próxima etapa, veremos como acessar bases de dados espaciais na plataforma Java.	
 
 
