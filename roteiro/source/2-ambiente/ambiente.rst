@@ -105,7 +105,7 @@ Criação do Projeto Eclipse WTP
 .. image:: images/tela_variavel_m2repo1.png
 
 
-	Preencher os dados da variavel *M2_REPO* e apontar para o diretorio *~/.m2/repository* que é o local padrão onde o maven deposita os jars baixados
+Preencher os dados da variavel *M2_REPO* e apontar para o diretorio *~/.m2/repository* que é o local padrão onde o maven deposita os jars baixados
 
 .. image:: images/tela_variavel_m2repo2.png
 
