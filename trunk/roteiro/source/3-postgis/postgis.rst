@@ -314,7 +314,7 @@ A potencialidade de um banco de dados espacial é avaliada numa situação como 
 
 
 Criando visão dos 10 maiores municipios do brasil em população
-=============================================================
+==============================================================
 
 1. Primeiro vamos criar a consulta que nos retorna os 10 maiores municipios por população::
 
@@ -331,7 +331,7 @@ Criando visão dos 10 maiores municipios do brasil em população
 	
 	LIMIT 10;
 
-2. Agora vamos criar uma view para utilizarmos futuramente
+2. Agora vamos criar uma view para utilizarmos futuramente::
 
 	CREATE VIEW municipio_pop AS
 	SELECT 
@@ -372,7 +372,7 @@ Criando visão dos 10 maiores municipios do brasil em área
 	
 	LIMIT 10;
 	
-3. Criar uma view para consultas futuras
+3. Criar uma view para consultas futuras::
 
 	CREATE VIEW municipio_area AS
 	SELECT 
