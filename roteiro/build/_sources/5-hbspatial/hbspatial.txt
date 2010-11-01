@@ -56,4 +56,86 @@ Configurando o projeto com HibernateSpatial e Postgis
 
 .. image:: images/testEntityManager.png
 	
-	
+##############################
+Mapeando Entidades Geograficas
+##############################
+
+
+==========
+Municipio
+==========
+
+1. Vamos iniciar criando e mapeando a entidade *org.latinoware.geodojo.app.entity.Municipio*. Como a tabela de municipio é um pouco extensa, iremos mapear apenas parte dela para o nosso modelo de classes. Não se existe obrigatoriedade de mapear todas as colunas de uma tabela para o mundo Orientado a Objetosm claro que tomando as devidas precalções para as colunas NOT NULL.
+
+
+	   .. literalinclude:: artifacts/Municipio.java
+	      :language: java
+
+2. Atente para o mapeamento da coluna de dados geograficos.
+
+
+ .. code-block:: java
+  
+    @Column(name = "the_geom")
+    @Type(type = "org.hibernatespatial.GeometryUserType")
+    private MultiPolygon poligono;
+    
+3. Vamos criar um caso de teste para verificar se a nossa entidade está mapeada e funcionando corretamente junto ao banco de dados. Primeiramente vamos criar a estrutura do caso de teste que irá ser responsavel por iniciar e finalizar um *EntityManager* para nos comunicarmos com o banco de dados.
+
+	   .. literalinclude:: artifacts/TestaMunicipioEntity.java
+	      :language: java
+	      :lines: 16-31
+
+4. Para o nosso método de teste, vamos implementar uma consulta de todos os municipios presentes no estado de sergipe e verificar se todos são retornados.
+
+	   .. literalinclude:: artifacts/TestaMunicipioEntity.java
+	      :language: java
+	      :lines: 33-42
+    
+5. Vamos colocar um breakpoint na linha do comando *Assert.assertTrue* e executar o JUnit em modo debug. Na sequencia vamos dar um *INSPECT* na lista, abrir uma entidade de municipio e olhar o atributo *poligono*
+
+
+.. image:: images/inspect.png
+
+6. Se tudo estiver correto, o teste deve dar OK(verde)
+
+.. image:: images/testeMunicipio.png
+
+==================
+Unidade Federativa
+==================
+
+1. Vamos mapear a tabela de *uf* para a classe *UnidadeFederativa*
+
+	   .. literalinclude:: artifacts/UnidadeFederativa.java
+	      :language: java
+
+2. Seguindo o padrão, vamos criar um caso de teste para esta entidade. Note que estamos utilizando um elemento de consulta espacial.
+
+	   .. literalinclude:: artifacts/TestaUnidadeFederativa.java
+	      :language: java
+
+3. Se tudo estiver correto, o teste deve dar OK(verde) 
+
+=========
+GeoTwitt
+=========
+
+1. Vamos mapear a entidade que iremos utilizar para cadastrar os twitts. A principio um twitt possui 3 dados básicos(autor,mensagem e localizacao) sendo a mensagem um atributo de no maximo 140 caracteres.
+
+	   .. literalinclude:: artifacts/Geotwitt.java
+	      :language: java
+
+2. Agora vamos criar a tabela para a nossa entidade. Note que a coluna geografica é criada a partir da função *AddGeometryColumn*.
+
+	   .. literalinclude:: artifacts/create_geotwitt.sql
+	      :language: sql
+
+3. Seguindo o padrão, vamos criar um caso de teste para esta entidade. Desta vez vamos testar toda a operação CRUD.
+
+	   .. literalinclude:: artifacts/TestaGeoTwitt.java
+	      :language: java
+
+
+Finalizamos então o modulo de HibernateSpatial. Durante o andamento do roteiro iremos abordando outros assuntos do hibernate spatial.
+

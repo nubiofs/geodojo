@@ -3,8 +3,14 @@
 :Version: |release|
 :License: Create Commons with attribution
 
-************************
+**************************************
   Serviço de Mapas na Web - Geoserver
-************************
+**************************************
    
 .. contents::
+
+Uma das principais componentes de um solução webgis é o servidor de mapas. O servidor de mapas é o responsavel por processar todas as fontes de dados presentes em diferentes tipos de bases, sejam elas arquivo, banco de dados, serviços na web e outros. Os dados processados são organizados na estrutura de layers e estas estarão disponiveis na web, através do protocolo HTTP, para serem consumidas no formato de imagem ou textual(vetores).
+
+A OGC(Open Geospatial Consortium - http://www.ogc.org) regulamenta diversos padrões e formatos com especificações abertos para serem utilizados omo base nos serviços de mapas na web. Dentre estes serviços podemos destacar o WMS(Web Map Service), WFS(Web Feature Service) e o WCS(Web Coverage Services) que iremos trabalhar durante este modulo do roteiro.
+
+No mundo opensource existem diversos servidores de mapas disponíveis onde podemos destacar o mapserver e geoserver. O mapserver é considerado um dos mais antigos servidores de mapas opensource, escrito em *c/c++* e amplamente utilizado.

@@ -63,6 +63,12 @@
 <ul class="simple">
 <li><a class="reference internal" href="#persistencia-de-dados-espacial-hibernate-spatial" id="id1">Persistência de Dados Espacial - Hibernate Spatial</a><ul>
 <li><a class="reference internal" href="#configurando-o-projeto-com-hibernatespatial-e-postgis" id="id2">Configurando o projeto com HibernateSpatial e Postgis</a></li>
+<li><a class="reference internal" href="#mapeando-entidades-geograficas" id="id3">Mapeando Entidades Geograficas</a><ul>
+<li><a class="reference internal" href="#municipio" id="id4">Municipio</a></li>
+<li><a class="reference internal" href="#unidade-federativa" id="id5">Unidade Federativa</a></li>
+<li><a class="reference internal" href="#geotwitt" id="id6">GeoTwitt</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -248,6 +254,450 @@
 <li>Se tudo estiver correto, o teste deve dar OK(verde)</li>
 </ol>
 <img alt="../_images/testEntityManager.png" src="../_images/testEntityManager.png" />
+</div>
+<div class="section" id="mapeando-entidades-geograficas">
+<h2><a class="toc-backref" href="#id3">Mapeando Entidades Geograficas</a><a class="headerlink" href="#mapeando-entidades-geograficas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="municipio">
+<h3><a class="toc-backref" href="#id4">Municipio</a><a class="headerlink" href="#municipio" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Vamos iniciar criando e mapeando a entidade <em>org.latinoware.geodojo.app.entity.Municipio</em>. Como a tabela de municipio é um pouco extensa, iremos mapear apenas parte dela para o nosso modelo de classes. Não se existe obrigatoriedade de mapear todas as colunas de uma tabela para o mundo Orientado a Objetosm claro que tomando as devidas precalções para as colunas NOT NULL.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.MultiPolygon</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Municipio</span> <span class="o">{</span>
+
+	<span class="nd">@Id</span>
+	<span class="nd">@GeneratedValue</span>
+	<span class="kd">public</span> <span class="n">Long</span> <span class="n">gid</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">nome</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">uf</span><span class="o">;</span>
+	
+	<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;the_geom&quot;</span><span class="o">)</span>
+    <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;org.hibernatespatial.GeometryUserType&quot;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">MultiPolygon</span> <span class="n">poligono</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getGid</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">gid</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setGid</span><span class="o">(</span><span class="n">Long</span> <span class="n">gid</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">gid</span> <span class="o">=</span> <span class="n">gid</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNome</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNome</span><span class="o">(</span><span class="n">String</span> <span class="n">nome</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nome</span> <span class="o">=</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getUf</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">uf</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUf</span><span class="o">(</span><span class="n">String</span> <span class="n">uf</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">uf</span> <span class="o">=</span> <span class="n">uf</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">MultiPolygon</span> <span class="nf">getPoligono</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">poligono</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPoligono</span><span class="o">(</span><span class="n">MultiPolygon</span> <span class="n">poligono</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">poligono</span> <span class="o">=</span> <span class="n">poligono</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Atente para o mapeamento da coluna de dados geograficos.</p>
+</li>
+</ol>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;the_geom&quot;</span><span class="o">)</span>
+<span class="nd">@Type</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;org.hibernatespatial.GeometryUserType&quot;</span><span class="o">)</span>
+<span class="kd">private</span> <span class="n">MultiPolygon</span> <span class="n">poligono</span><span class="o">;</span>
+</pre></div>
+</div>
+</blockquote>
+<ol class="arabic" start="3">
+<li><p class="first">Vamos criar um caso de teste para verificar se a nossa entidade está mapeada e funcionando corretamente junto ao banco de dados. Primeiramente vamos criar a estrutura do caso de teste que irá ser responsavel por iniciar e finalizar um <em>EntityManager</em> para nos comunicarmos com o banco de dados.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestaMunicipioEntity</span> <span class="o">{</span>
+
+	
+	<span class="kd">private</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+	
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">&quot;geodojodbspatial&quot;</span><span class="o">).</span><span class="na">createEntityManager</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@After</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">release</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Para o nosso método de teste, vamos implementar uma consulta de todos os municipios presentes no estado de sergipe e verificar se todos são retornados.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre>	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testaConsulta</span><span class="o">()</span>
+	<span class="o">{</span>
+		<span class="n">Query</span> <span class="n">query</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">&quot;from Municipio where uf = :uf &quot;</span><span class="o">).</span><span class="na">setParameter</span><span class="o">(</span><span class="s">&quot;uf&quot;</span><span class="o">,</span> <span class="s">&quot;SE&quot;</span><span class="o">);</span>
+		
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Municipio</span><span class="o">&gt;</span> <span class="n">municipiosSergipanos</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="na">getResultList</span><span class="o">();</span>
+		
+		<span class="n">Assert</span><span class="o">.</span><span class="na">assertTrue</span><span class="o">(</span><span class="n">municipiosSergipanos</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">75</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Vamos colocar um breakpoint na linha do comando <em>Assert.assertTrue</em> e executar o JUnit em modo debug. Na sequencia vamos dar um <em>INSPECT</em> na lista, abrir uma entidade de municipio e olhar o atributo <em>poligono</em></p>
+</li>
+</ol>
+<img alt="../_images/inspect.png" src="../_images/inspect.png" />
+<ol class="arabic simple" start="6">
+<li>Se tudo estiver correto, o teste deve dar OK(verde)</li>
+</ol>
+<img alt="../_images/testeMunicipio.png" src="../_images/testeMunicipio.png" />
+</div>
+<div class="section" id="unidade-federativa">
+<h3><a class="toc-backref" href="#id5">Unidade Federativa</a><a class="headerlink" href="#unidade-federativa" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Vamos mapear a tabela de <em>uf</em> para a classe <em>UnidadeFederativa</em></p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Table</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.MultiPolygon</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;uf&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UnidadeFederativa</span> <span class="o">{</span>
+
+	<span class="nd">@Id</span>
+	<span class="nd">@GeneratedValue</span>
+	<span class="kd">public</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="n">String</span> <span class="n">nome</span><span class="o">;</span>
+	
+	<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;the_geom&quot;</span><span class="o">)</span>
+    <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;org.hibernatespatial.GeometryUserType&quot;</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">MultiPolygon</span> <span class="n">poligono</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getid</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setid</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getNome</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setNome</span><span class="o">(</span><span class="n">String</span> <span class="n">nome</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nome</span> <span class="o">=</span> <span class="n">nome</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">MultiPolygon</span> <span class="nf">getPoligono</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">poligono</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPoligono</span><span class="o">(</span><span class="n">MultiPolygon</span> <span class="n">poligono</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">poligono</span> <span class="o">=</span> <span class="n">poligono</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Seguindo o padrão, vamos criar um caso de teste para esta entidade. Note que estamos utilizando um elemento de consulta espacial.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">teste</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.EntityManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Persistence</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Query</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.After</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.latinoware.geodojo.app.entity.Municipio</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestaUnidadeFederativa</span> <span class="o">{</span>
+<span class="kd">private</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+	
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">&quot;geodojodbspatial&quot;</span><span class="o">).</span><span class="na">createEntityManager</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@After</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">release</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testaConsultaEspacial</span><span class="o">()</span>
+	<span class="o">{</span>
+		<span class="n">Query</span> <span class="n">query</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">&quot;select m from Municipio m, UnidadeFederativa uf where uf.nome = :uf and within(m.poligono,uf.poligono) = true &quot;</span><span class="o">).</span><span class="na">setParameter</span><span class="o">(</span><span class="s">&quot;uf&quot;</span><span class="o">,</span> <span class="s">&quot;SE&quot;</span><span class="o">);</span>
+		
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Municipio</span><span class="o">&gt;</span> <span class="n">municipiosSergipanos</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="na">getResultList</span><span class="o">();</span>
+		
+		<span class="n">Assert</span><span class="o">.</span><span class="na">assertTrue</span><span class="o">(</span><span class="n">municipiosSergipanos</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="mi">75</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Se tudo estiver correto, o teste deve dar OK(verde)</p>
+</li>
+</ol>
+</div>
+<div class="section" id="geotwitt">
+<h3><a class="toc-backref" href="#id6">GeoTwitt</a><a class="headerlink" href="#geotwitt" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Vamos mapear a entidade que iremos utilizar para cadastrar os twitts. A principio um twitt possui 3 dados básicos(autor,mensagem e localizacao) sendo a mensagem um atributo de no maximo 140 caracteres.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">entity</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Column</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.hibernate.annotations.Type</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.Point</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Geotwitt</span> <span class="o">{</span>
+
+	<span class="nd">@Id</span>
+	<span class="nd">@GeneratedValue</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+	
+	
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">autor</span><span class="o">;</span>
+	
+	<span class="nd">@Column</span><span class="o">(</span><span class="n">length</span><span class="o">=</span><span class="mi">140</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">mensagem</span><span class="o">;</span>
+	
+	<span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;the_geom&quot;</span><span class="o">)</span>
+    <span class="nd">@Type</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;org.hibernatespatial.GeometryUserType&quot;</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="n">Point</span> <span class="n">location</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getAutor</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">autor</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAutor</span><span class="o">(</span><span class="n">String</span> <span class="n">autor</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">autor</span> <span class="o">=</span> <span class="n">autor</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getMensagem</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">mensagem</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMensagem</span><span class="o">(</span><span class="n">String</span> <span class="n">mensagem</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">mensagem</span> <span class="o">=</span> <span class="n">mensagem</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">Point</span> <span class="nf">getLocation</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">location</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLocation</span><span class="o">(</span><span class="n">Point</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">location</span> <span class="o">=</span> <span class="n">location</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Agora vamos criar a tabela para a nossa entidade. Note que a coluna geografica é criada a partir da função <em>AddGeometryColumn</em>.</p>
+<blockquote>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">geotwitt</span>
+<span class="p">(</span>
+  <span class="n">id</span> <span class="nb">serial</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="n">autor</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">254</span><span class="p">),</span>
+  <span class="n">mensagem</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">140</span><span class="p">),</span>
+  <span class="k">CONSTRAINT</span> <span class="n">geotwitt</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">),</span> 
+  <span class="p">)</span>
+<span class="k">WITH</span> <span class="p">(</span>
+  <span class="k">OIDS</span><span class="o">=</span><span class="k">FALSE</span>
+<span class="p">);</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">geotwitt</span> <span class="k">OWNER</span> <span class="k">TO</span> <span class="n">postgres</span><span class="p">;</span>
+
+<span class="k">SELECT</span> <span class="n">AddGeometryColumn</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;geotwitt&#39;</span><span class="p">,</span><span class="s1">&#39;the_geom&#39;</span><span class="p">,</span><span class="s1">&#39;4326&#39;</span><span class="p">,</span><span class="s1">&#39;POINT&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+<li><p class="first">Seguindo o padrão, vamos criar um caso de teste para esta entidade. Desta vez vamos testar toda a operação CRUD.</p>
+<blockquote>
+<div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">org</span><span class="o">.</span><span class="na">latinoware</span><span class="o">.</span><span class="na">geodojo</span><span class="o">.</span><span class="na">app</span><span class="o">.</span><span class="na">teste</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.EntityManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Persistence</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.After</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Assert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.latinoware.geodojo.app.entity.Geotwitt</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.Coordinate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.GeometryFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.vividsolutions.jts.geom.Point</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestaGeoTwitt</span> <span class="o">{</span>
+
+<span class="kd">private</span> <span class="n">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+	
+	<span class="nd">@Before</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">Persistence</span><span class="o">.</span><span class="na">createEntityManagerFactory</span><span class="o">(</span><span class="s">&quot;geodojodbspatial&quot;</span><span class="o">).</span><span class="na">createEntityManager</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@After</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">release</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">inserir</span><span class="o">()</span>
+	<span class="o">{</span>
+
+		<span class="c1">//Ponto Central Foz do Iguacu</span>
+		<span class="n">Coordinate</span> <span class="n">coord</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Coordinate</span><span class="o">(-</span><span class="mf">54.4818658859215</span><span class="o">,</span> <span class="o">-</span><span class="mf">25.4677504589312</span><span class="o">);</span>
+		<span class="n">Point</span> <span class="n">location</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeometryFactory</span><span class="o">().</span><span class="na">createPoint</span><span class="o">(</span><span class="n">coord</span><span class="o">);</span>
+		<span class="n">location</span><span class="o">.</span><span class="na">setSRID</span><span class="o">(</span><span class="mi">4326</span><span class="o">);</span>
+		
+		
+		<span class="n">Geotwitt</span> <span class="n">twitt</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Geotwitt</span><span class="o">();</span>
+		<span class="n">twitt</span><span class="o">.</span><span class="na">setAutor</span><span class="o">(</span><span class="s">&quot;rafikdabahia&quot;</span><span class="o">);</span>
+		<span class="n">twitt</span><span class="o">.</span><span class="na">setMensagem</span><span class="o">(</span><span class="s">&quot;Testando o nosso primeiro #geotwitt com localizacao&quot;</span><span class="o">);</span>
+		<span class="n">twitt</span><span class="o">.</span><span class="na">setLocation</span><span class="o">(</span><span class="n">location</span><span class="o">);</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">twitt</span><span class="o">);</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">commit</span><span class="o">();</span>
+		
+		
+		
+	<span class="o">}</span>
+	
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">atualizar</span><span class="o">()</span>
+	<span class="o">{</span>
+
+		<span class="n">Geotwitt</span> <span class="n">twitt</span> <span class="o">=</span> <span class="o">(</span><span class="n">Geotwitt</span><span class="o">)</span> <span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">&quot;from Geotwitt&quot;</span><span class="o">).</span><span class="na">setMaxResults</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">getSingleResult</span><span class="o">();</span>
+		
+		<span class="n">twitt</span><span class="o">.</span><span class="na">setAutor</span><span class="o">(</span><span class="s">&quot;rafikdabahia&quot;</span><span class="o">);</span>
+		<span class="n">twitt</span><span class="o">.</span><span class="na">setMensagem</span><span class="o">(</span><span class="s">&quot;Testando o nosso primeiro #geotwitt com localizacao. UPDATED&quot;</span><span class="o">);</span>
+		
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">merge</span><span class="o">(</span><span class="n">twitt</span><span class="o">);</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">commit</span><span class="o">();</span>
+		
+		
+		
+	<span class="o">}</span>
+	
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">procurarRemover</span><span class="o">()</span>
+	<span class="o">{</span>
+
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Geotwitt</span><span class="o">&gt;</span> <span class="n">twitts</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">&quot; from Geotwitt&quot;</span><span class="o">).</span><span class="na">getResultList</span><span class="o">();</span>
+	
+		<span class="n">Assert</span><span class="o">.</span><span class="na">assertTrue</span><span class="o">(</span><span class="n">twitts</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">);</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">begin</span><span class="o">();</span>
+		
+		<span class="k">for</span> <span class="o">(</span><span class="n">Geotwitt</span> <span class="n">geotwitt</span> <span class="o">:</span> <span class="n">twitts</span><span class="o">)</span> <span class="o">{</span>
+		
+			<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">geotwitt</span><span class="o">);</span>
+			
+		<span class="o">}</span>
+		
+		<span class="k">this</span><span class="o">.</span><span class="na">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">().</span><span class="na">commit</span><span class="o">();</span>
+		
+		
+		
+		
+		
+	<span class="o">}</span>
+	
+	
+<span class="o">}</span>
+</pre></div>
+</div>
+</blockquote>
+</li>
+</ol>
+<p>Finalizamos então o modulo de HibernateSpatial. Durante o andamento do roteiro iremos abordando outros assuntos do hibernate spatial.</p>
+</div>
 </div>
 </div>
 
