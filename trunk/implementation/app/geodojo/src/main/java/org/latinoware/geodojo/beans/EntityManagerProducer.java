@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
  * @author ranophoenix
  *
  */
-@SuppressWarnings("serial")
 @ApplicationScoped
 public class EntityManagerProducer {
 
