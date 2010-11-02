@@ -197,7 +197,7 @@ A representação espacial destas 5 geometrias inseridas seria algo parecido com
 Importação de Dados Geograficos
 ###############################
 
-Para a nossa aplicação vamos precisar utilizar uma serie de layers de informação geográficas vetoriais oriundas do provedor IBGE. Estas informações estão disponiveis no formato shapefile e podem ser baixadas a partir do site do IBGE. http://www.ibge.gov.br. Para facilitar o trabalho deste minicurso os arquivos foram baixados e estão disponiveis no caminho *~/Desktop/GeoDojoEnv/data.
+Para a nossa aplicação vamos precisar utilizar uma serie de layers de informação geográficas vetoriais oriundas do provedor IBGE. Estas informações estão disponiveis no formato shapefile e podem ser baixadas a partir do site do IBGE. http://www.ibge.gov.br. Para facilitar o trabalho deste minicurso os arquivos foram baixados e estão disponiveis no caminho *~/Desktop/GeoDojoEnv/data*.
 
 Vamos importar dados para construir as camadas de:
 
