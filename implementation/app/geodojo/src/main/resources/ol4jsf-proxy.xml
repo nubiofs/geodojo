@@ -5,10 +5,10 @@
 		<description>Development Environment.</description>
 		<resources>
 			<resource name="wfs">
-				<url>http://demo.opengeo.org/geoserver/wfs</url>
+				<url>http://localhost:8082/geoserver/wfs</url>
 			</resource>
 			<resource name="wms">
-				<url>http://demo.opengeo.org/geoserver/wms</url>
+				<url>http://localhost:8082/geoserver/wms</url>
 			</resource>
 		</resources>
 	</environment>

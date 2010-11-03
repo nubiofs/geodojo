@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:m="http://www.ol4jsf.org">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>OL4JSF World Map</title>
+</h:head>
+<h:body>
+	<m:map width="512px" height="256px"
+		options="{controls: [], numZoomLevels: 6}">
+		<m:wmsLayer name="World Layer Bluemarble"
+			url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms"
+			params="{layers:'topp:bluemarble'}" />
+		<m:wmsLayer name="World Layer ADM"
+			url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms"
+			params="{layers:'topp:world_adm0',transparent:true}"
+			options="{isBaseLayer:false}" />
+		<m:vectorLayer name="Geometrias" value="#{worldMapBean.wkts}" />
+		<m:featureInfoPopup
+			url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms">
+		</m:featureInfoPopup>
+		<m:navigationControl />
+		<m:panZoomBarControl />
+		<m:layerSwitcherControl options="{ascending:false}" />
+		<m:scaleLineControl />
+		<m:mousePositionControl />
+		<m:overviewMapControl />
+		<m:keyboardDefaultsControl />
+		<m:permalinkControl />
+	</m:map>
+</h:body>
+</html>
