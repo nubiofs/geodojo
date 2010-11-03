@@ -1,21 +1,21 @@
 package org.latinoware.geodojo.beans;
 
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+
+import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import org.ol4jsf.util.WKTFeaturesCollection;
 
 /**
  *
  * @author ranophoenix
  */
-@Named
-@RequestScoped
+@Model
 public class QueryViewManager {
 
     @Inject
@@ -48,14 +48,15 @@ public class QueryViewManager {
         this.qryLanguage = qryLanguage;
     }
 
-    public String executeQuery() {
+    @SuppressWarnings("unchecked")
+    public void executeQuery() {
         try {
             WKTFeaturesCollection<String> wktFeatures = new WKTFeaturesCollection<String>();
             Query q;
             if ("POSTGIS".equals(qryLanguage)) {
-                q = em.createNativeQuery(query); //Ex: select st_astext(localizacao) from ponto
+                q = em.createNativeQuery(query); 
             } else {
-                q = em.createQuery(query); // select p.localizacao from Ponto p
+                q = em.createQuery(query);
             }
             List<String> result = (List<String>) q.getResultList();
             wktFeatures.addAllFeatures(result);
@@ -64,6 +65,5 @@ public class QueryViewManager {
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
         }
-        return null;
     }
 }
