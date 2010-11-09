@@ -19,40 +19,22 @@ Neste capitulo vamos configurar o nosso projeto java para trabalhar com o hibern
 ##########################################################
 Configurando o projeto com HibernateSpatial e Postgis
 ##########################################################
+	
+1. Criar o arquivo *persistence.xml* no diretório resource/META-INF/persistence.xml
 
-1. Atualizar o nosso arquivo pom.xml com os seguintes itens:
-	
-	* Repositórios de dependencias
-	* Dependencias
-	* Diretivas de compilação do projeto
-	
-.. literalinclude:: artifacts/pom.xml
+.. image:: images/metainf.png
+
+2. Incluir o conteudo com as configurações da base de dados
+
+.. literalinclude:: artifacts/persistence.xml
      :language: xml
-
-2. Atualizar o projeto do eclipse com as novas dependencias::
-
-	$ mvn eclipse:eclipse
-	
-	-> F5 no projeto geodojo do eclipse
-	
-	
-.. image:: images/libraries.png
 
 3. Criar a classe de teste *org.latinoware.geodojo.app.teste.TestaFabricarEntityManager* e executar
 
 .. literalinclude:: artifacts/TestaFabricaEntityManager.java
      :language: java	
-	
-4. Criar o arquivo *persistence.xml* no diretório resource/META-INF/persistence.xml
 
-.. image:: images/metainf.png
-
-5. Incluir o conteudo com as configurações da base de dados
-
-.. literalinclude:: artifacts/persistence.xml
-     :language: xml
-
-6. Se tudo estiver correto, o teste deve dar OK(verde)
+4. Se tudo estiver correto, o teste deve dar OK(verde)
 
 .. image:: images/testEntityManager.png
 	
@@ -135,6 +117,27 @@ GeoTwitt
 
 	   .. literalinclude:: artifacts/TestaGeoTwitt.java
 	      :language: java
+
+########################################
+Arquitetura de Injeção de EntityManager
+########################################
+
+Os exemplos de JPA que iremos implementar, vamos precisar obter um EntityManager para realizar operações sobre os dados no SGBD. A partir da estrutura do CDI vamos criar uma estrutura de injeção de dependencia, capaz de fabricar e injetar o EntityManager da nossa aplicação em qualquer classe java.
+
+
+1. Vamos criar a classe *org.latinoware.geodojo.app.bean.producer.EntityManagerProducer* que será responsável por instanciar um EntityManager para ser injetado nas classes que necessitam deste recurso. O CDI disponibiliza uma estrutura denominada *Producer* para tratar esta necessidade.
+
+2. Desta forma o CDI irá injetar automaticamente um EntityManager sempre que um bean possuir a seguinte estrutura:
+
+	.. code-block:: java
+		:linenos:
+	
+		public class BeanExemplo {
+		
+		    @Inject
+		    private EntityManager em;
+		}
+
 
 
 Finalizamos então o modulo de HibernateSpatial. Durante o andamento do roteiro iremos abordando outros assuntos do hibernate spatial.
