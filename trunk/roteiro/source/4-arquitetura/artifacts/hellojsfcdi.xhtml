@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	      xmlns:f="http://java.sun.com/jsf/core"
+	      xmlns:ui="http://java.sun.com/jsf/facelets"
+	      xmlns:m="http://www.ol4jsf.org">
+	
+	    <h:head>
+	    </h:head>
+	    <body>
+	        <h1>Exemplo JSF - CDI</h1>
+	        <h:form prependId="false">
+	            Nome: <h:inputText value="#{helloJSF.nome}" />                        
+	            <h:commandButton value="Diga olá" action="#{helloJSF.sayHello}">
+	            </h:commandButton>
+	            <br/>
+	            <h:outputText id="output"  binding="#{helloJSF.output}" />
+	        </h:form>
+	    </body>
+	</html>

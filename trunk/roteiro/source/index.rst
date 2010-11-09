@@ -4,7 +4,7 @@
 GeoDOJO Tutorial - Latinoware 2010
 **********************************
 
-Desmistificando a construção de aplicações web com recursos de geoprocessamento em plataforma JEE utilizando componentes 100% livres
+Desmistificando a construção de aplicações web com recursos de geoprocessamento em plataforma JEE6 utilizando componentes 100% livres
 
 
 Introdução
@@ -15,7 +15,7 @@ A construção de aplicações web para atender requisitos de geoprocessamento d
 Diante destes desafios muitos desenvolvedores de software se sentem desmotivados a participar de projetos envolvendo geoprocessamento e software livre. Este minicurso tem como principal objetivo desmistificar a construção de uma aplicação web com recursos de geoprocessamento na plataforma JEE. Através da dinâmica de coding dojo será abordado em um formato divertido e interativo, as etapas da construção da aplicação, desde a concepção e seleção da arquitetura e dos componentes até os resultados finais da sua execução na web pelo usuário. Dentre as componentes que serão abordadas, podemos destacar Hibernate Spatial, Postgres, Geoserver, OpenLayers, Ol4JSF e outros.
 
 
-Conteudo
+Conteúdo
 ===========
 
 .. toctree::
@@ -28,7 +28,10 @@ Conteudo
    5-hbspatial/hbspatial 
    6-geoserver/geoserver  
    7-ol4jsf/ol4jsf    
-  
+   8-exemplo1/exemplo1
+   9-exemplo2/exemplo2
+   10-exemplo3/exemplo3      
+        
 Instrutores
 =============
 

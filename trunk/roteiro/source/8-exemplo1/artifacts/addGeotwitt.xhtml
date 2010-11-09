@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:m="http://www.ol4jsf.org">
+
+    <h:head>
+        <style type="text/css">
+            table.featureInfo {
+                width: 100%;
+            }
+
+            .olControlPanel div {
+                display: block;
+                width: 24px;
+                height: 24px;
+                margin: 5px;
+                background-color: red;
+            }
+
+            .olControlPanel .olControlNavigationItemActive {
+                background-color: blue;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/pan_on.png']}");
+            }
+
+            .olControlPanel .olControlNavigationItemInactive {
+                background-color: orange;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/pan_off.png']}");
+            }
+
+            .olControlPanel .olControlZoomBoxItemInactive {
+                width: 22px;
+                height: 22px;
+                background-color: orange;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/drag-rectangle-off.png']}");
+            }
+
+            .olControlPanel .olControlZoomBoxItemActive {
+                width: 22px;
+                height: 22px;
+                background-color: blue;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/drag-rectangle-on.png']}");
+            }
+
+            .olControlPanel .olControlZoomToMaxExtentItemInactive {
+                width: 18px;
+                height: 18px;
+                background-image:
+                    url("#{resource['ol4jsf:img/zoom-world-mini.png']}");
+            }
+
+            .olControlPanel .olControlDrawFeatureItemActive {
+                width:  22px;
+                height: 22px;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/draw_point_on.png']}");
+            }
+            .olControlPanel .olControlDrawFeatureItemInactive {
+                width:  22px;
+                height: 22px;
+                background-image:
+                    url("#{resource['ol4jsf:theme/default/img/draw_point_off.png']}");
+            }
+        </style>
+    </h:head>
+    <body>
+        <h1>Geodojo Send GeoTwitt</h1>
+        <h:messages/>
+        <h:form prependId="false">
+       
+           Usuario: <h:inputText value="#{geotwittBean.twitt.autor}" /><br/>
+           Senha:   <h:inputSecret value="#{geotwittBean.passwd}" redisplay="true"/><br/>
+           Status:  <h:inputTextarea value="#{geotwittBean.twitt.mensagem}" maxLength="140" /><br/>
+
+            <m:map width="512px" height="480px"
+            options="{controls: [], 
+						maxExtent: new OpenLayers.Bounds(
+	                    			-73.991, -33.751,
+	                    			-32.378, 5.272
+	                			),
+						maxResolution: 0.16255078125					
+						}" renderOnWindowLoad="false">
+                <m:wmsLayer name="OpenLayers WMS"
+					url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms"
+					params="{layers:'limite_politico'}" />
+                <m:inputVectorLayer name="Features" value="#{geotwittBean.twitt.location}" jsVariable="point" dropFeaturesBeforeDraw="true" />
+                <m:panelControl>
+                    <m:navigationControl />
+                    <m:zoomBoxControl />
+                    <m:drawFeatureControl layer="point" handler="OpenLayers.Handler.Point" jsVariable="iControl"/>
+                    <m:zoomToMaxExtentControl />
+                </m:panelControl>
+                <m:mousePositionControl></m:mousePositionControl>
+                <m:scaleLineControl></m:scaleLineControl>
+                <m:script>iControl.activate();</m:script>
+            </m:map>
+
+            <h:commandButton value="Update" action="#{geotwittBean.update}" />
+        </h:form>
+    </body>
+</html>

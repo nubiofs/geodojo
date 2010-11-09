@@ -36,7 +36,7 @@ private EntityManager em;
 	{
 
 		//Ponto Central Foz do Iguacu
-		Coordinate coord = new Coordinate(-54.4818658859215, -25.4677504589312);
+		Coordinate coord = new Coordinate(-25.4607 -54.5820);
 		Point location = new GeometryFactory().createPoint(coord);
 		location.setSRID(4326);
 		
@@ -93,11 +93,7 @@ private EntityManager em;
 		}
 		
 		this.em.getTransaction().commit();
-		
-		
-		
-		
-		
+			
 	}
 	
 	

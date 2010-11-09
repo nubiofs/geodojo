@@ -172,9 +172,9 @@ Para inserir dados na tabela, vamos precisar executar scripts de *INSERT*. Para 
 
 6. O postgis tambem oferece inumeros formatos de saida como KML e GML::
 	
-			Select astkml(the_geom_poly) from geometrias where id = 5
+			Select askml(the_geom_poly) from geometrias where id = 5
 		
-			Select astgml(the_geom_line) from geometrias where id = 4
+			Select asgml(the_geom_line) from geometrias where id = 4
 
 
 *Resultado KML*
