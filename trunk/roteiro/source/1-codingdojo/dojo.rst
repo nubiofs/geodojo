@@ -3,9 +3,9 @@
 :Version: |release|
 :License: Create Commons with attribution
 
-************************
- Coding Dojo
-************************
+**************************
+ O que é Coding Dojo?
+**************************
    
 .. contents::
 

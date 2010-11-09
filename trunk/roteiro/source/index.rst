@@ -24,13 +24,14 @@ Conteúdo
    1-codingdojo/dojo
    2-ambiente/ambiente
    3-postgis/postgis
-   4-arquitetura/arquitetura   
+   4-arquitetura/arquitetura      
    5-hbspatial/hbspatial 
    6-geoserver/geoserver  
    7-ol4jsf/ol4jsf    
    8-exemplo1/exemplo1
    9-exemplo2/exemplo2
-   10-exemplo3/exemplo3      
+   10-exemplo3/exemplo3
+   extra-arquitetura/arquitetura       
         
 Instrutores
 =============
@@ -42,8 +43,8 @@ Rafael Almeida Fernandez Soto está cursando o Mestrado em Sistemas e Computaç�
 .. image:: Robert.jpg
 
 
-Bacharel em Sistemas de Informação pela Unit, atua na área de TI há aproximadamente 10
-anos, sendo um entusiasta de tecnologias que rodam sobre a plataforma Java. Em meados de
+Robert é bacharel em Sistemas de Informação pela Unit, atua na área de TI há aproximadamente 10
+anos, sedo um entusiasta de tecnologias que rodam sobre a plataforma Java. Em meados de
 2008, ingressou na área de geoprocessamento através de um projeto de iniciação científica,
 no qual, um dos principais resultados, foi o desenvolvimento da biblioteca OL4JSF (OpenLayers
 For JavaServer Faces). Atualmente, trabalha como DBA no Tribunal de Justiça do Estado de
