@@ -1,0 +1,40 @@
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:m="http://www.ol4jsf.org">
+	
+	<h:head>
+	</h:head>
+	<body>
+	<h1>GeoRSS para Tweets</h1>
+	<h:form prependId="false">
+		<h:panelGroup id="mapPanel" layout="block">
+				<m:map width="512px" height="480px"
+			options="{controls: [], 
+						maxExtent: new OpenLayers.Bounds(
+	                    			-73.991, -33.751,
+	                    			-32.378, 5.272
+	                			)					
+						}" renderOnWindowLoad="false">
+				<m:wmsLayer name="Mundo"
+				url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms"
+				params="{layers:'world'}"/>
+				<m:wmsLayer name="Brasil"
+				url="#{facesContext.externalContext.requestContextPath}/OL4JSFProxy/wms"
+				params="{layers:'limite_politico'}" />
+                <m:geoRSSLayer name="Twitter GeoRSS" location="GeoRSS?user=geodojo" />
+				<m:navigationControl />
+				<m:panZoomBarControl />
+				<m:layerSwitcherControl options="{ascending:false}" />
+				<m:scaleLineControl />
+				<m:mousePositionControl />
+				<m:overviewMapControl />
+				<m:permalinkControl />
+			</m:map>
+		</h:panelGroup>
+		
+	</h:form>
+	</body>
+	</html>
