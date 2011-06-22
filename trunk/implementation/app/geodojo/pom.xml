@@ -40,9 +40,16 @@
         </repository>
         <!-- add JBOSS repository for easy access to Hibernate libraries -->
         <repository>
-            <id>JBOSS</id>
-            <url>http://repository.jboss.com/maven2</url>
-        </repository>
+			<id>nexus.jboss.org</id>
+			<name>JBoss Maven Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
 		      
     </repositories>
 
